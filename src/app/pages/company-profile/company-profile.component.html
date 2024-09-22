@@ -1,0 +1,201 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+  style="min-height: 200px; background-size: cover; background-position: center top;">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <h1 class="display-2 text-white">Olá, {{ company?.nomeFantasia | titlecase }}</h1>
+        <p class="text-white mt-0 mb-5">Atualize os dados da sua emrpesa</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <a href="javascript:void(0)">
+                <img
+                  [src]="company?.foto ? company?.foto : 'https://ionicframework.com/docs/demos/api/avatar/avatar.svg'"
+                  class="rounded-circle">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          <div class="d-flex justify-content-between">
+            <a href="javascript:void(0)" class="btn btn-sm btn-success mr-4">Editar Foto</a>
+          </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+
+          <div class="text-center mt-7">
+            <h3>
+              {{ company?.nomeFantasia | titlecase }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Meu Perfil</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form *ngIf="companyProfileForm" [formGroup]="companyProfileForm" (submit)="formSubmit()">
+            <h6 class="heading-small text-muted mb-4">Informações Gerais</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="cnpj">CNPJ</label>
+                    <input id="cnpj" type="text" class="form-control form-control-alternative" formControlName="cnpj"
+                      placeholder="cnpj"  mask="000.000.000-00||00.000.000/0000-00">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="nomefantasia">Nome Fantasia</label>
+                    <input id="nomefantasia" type="text" class="form-control form-control-alternative" formControlName="nomeFantasia"
+                      placeholder="Nome Fantasia">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="razaosocial">Razão Social</label>
+                    <input id="razaosocial" type="text" class="form-control form-control-alternative" formControlName="razaoSocial"
+                      placeholder="Razão Social">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="cep">CEP</label>
+                    <input id="cep" type="text" class="form-control form-control-alternative" formControlName="cep"
+                      placeholder="cep" >
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <div class="form-group">
+                    <label class="form-control-label" for="endereco">Endereço</label>
+                    <input id="endereco" type="text" class="form-control form-control-alternative" formControlName="endereco"
+                      placeholder="Endereço" >
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="bairro">Bairro</label>
+                    <input id="bairro" type="text" class="form-control form-control-alternative" formControlName="bairro"
+                      placeholder="Bairro" >
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label class="form-control-label" for="numero">Nº</label>
+                    <input id="numero" type="text" class="form-control form-control-alternative" formControlName="numero"
+                      placeholder="Nº" >
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label class="form-control-label" for="uf">UF</label>
+                    <input id="uf" type="text" class="form-control form-control-alternative" formControlName="uf"
+                      placeholder="UF" >
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="municipio">Município</label>
+                    <input id="municipio" type="text" class="form-control form-control-alternative" formControlName="municipio"
+                      placeholder="Município" >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+            <h6 class="heading-small text-muted mb-4">Localização no mapa</h6>
+            <div class="pl-lg-4"  formGroupName="geolocalizacao">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="latitude">Latitude</label>
+                    <input id="latitude" type="text" class="form-control form-control-alternative" formControlName="lat"
+                      placeholder="Latitude" >
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="longitude">Longitude</label>
+                    <input id="longitude" type="text" class="form-control form-control-alternative" formControlName="lng"
+                      placeholder="Longitude" >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+            <h6 class="heading-small text-muted mb-4">Redes Sociais</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="categoria">Categoria</label>
+                    <select id="categoria" class="form-control form-control-alternative" formControlName="categoria">
+                      <option *ngFor="let cat of categories" [value]="cat.description">{{cat.description}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row" formGroupName="socials">
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-control-label" for="facebook">Facebook</label>
+                    <input type="text" id="facebook" class="form-control form-control-alternative" formControlName="facebook"
+                      placeholder="Facebook" >
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-control-label" for="instagram">Instagram</label>
+                    <input id="instagram" type="text" class="form-control form-control-alternative" formControlName="instagram"
+                      placeholder="Instagram" >
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-control-label" for="linkedin">Linkedin</label>
+                    <input id="linkedin" type="text" class="form-control form-control-alternative" formControlName="linkedin"
+                      placeholder="Linkedin" >
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-control-label" for="whatsapp">WhatsApp</label>
+                    <input id="whatsapp" type="text" class="form-control form-control-alternative" formControlName="whatsapp"
+                      placeholder="WhatsApp" >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4">
+            <button type="submit" class="btn btn-info">Salvar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

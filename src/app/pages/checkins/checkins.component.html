@@ -1,0 +1,76 @@
+<div class="header pb-7 pt-5 pt-lg-7 d-flex align-items-center"
+  style="min-height: 120px; background-size: cover; background-position: center top;">
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <div class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <h1 class="text-white">Check-Ins</h1>
+        <p class="text-white mt-0 mb-5">Visualizar os últimos check-ins feitos em sua empresa.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+      <div class="card card-profile shadow">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <a href="javascript:void(0)">
+                <img
+                  [src]="recentCheckin?.customer?.photoURL ? recentCheckin?.customer?.photoURL : 'https://ionicframework.com/docs/demos/api/avatar/avatar.svg'"
+                  class="rounded-circle">
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+          <div class="text-center mt-8">
+            <h3>
+              {{recentCheckin?.customer?.displayName|titlecase}}
+            </h3>
+            <div class="h5 font-weight-300">
+              <i class="ni location_pin mr-2"></i>{{recentCheckin?.dateTime?.toDate() | date: "dd/MM/yyyy HH:mm:ss"}}
+            </div>
+            <hr class="my-4" />
+            <p>Este foi o ultimo check-in válido</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8 order-xl-1">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Últimos 10 Check-Ins</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of checkins">
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                      <img alt="Image placeholder" [src]="item?.customer?.photoURL">
+                    </a>
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">{{item?.customer?.displayName |titlecase}}</span>
+                    </div>
+                  </div>
+                </th>
+                <td>
+                  {{item?.dateTime.toDate() | date: "dd/MM/yyyy HH:mm:ss"}} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
